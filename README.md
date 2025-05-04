@@ -6,7 +6,7 @@
 
 **Важно:** Хотя шаблон стремится соответствовать актуальным нормам контроля СПбПУ, рекомендуется сверяться с официальными требованиями вашего института/кафедры, так как они могут обновляться или иметь специфические дополнения. Вы можете адаптировать этот шаблон под конкретные нужды вашей работы.
 
-Этот шаблон основан на [maks2199/DiplomaTeX]([ССЫЛКА_НА_ОРИГИНАЛЬНЫЙ_РЕПОЗИТОРИЙ](https://github.com/maks2199/DiplomaTeX)).
+Этот шаблон основан на [maks2199/DiplomaTeX](https://github.com/maks2199/DiplomaTeX).
 
 **Ссылка на данный репозиторий:** [https://github.com/vladimir-skvortsov/spbpu-latex-thesis-template](https://github.com/vladimir-skvortsov/spbpu-latex-thesis-template)
 
