@@ -1,0 +1,85 @@
+\documentclass[a4paper,14pt]{article}
+
+% текст ВКР рекомендуется писать в кодировке utf-8
+\usepackage[utf8]{inputenc}
+
+% Подключение пакета с шаблоном ВКР
+\usepackage{spbpu}
+
+% Используемые функции
+\include{customFunctions}
+
+% Константы
+\university{Министерство науки и высшего образования Российской Федерации Санкт-Петербургский политехнический университет Петра Великого}
+\institute{Физико-механический институт}
+\school{Высшая школа прикладной математики и вычислительной физики}
+\thesisTitle{ВЫПУСКНАЯ КВАЛИФИКАЦИОННАЯ РАБОТА}
+\title{Название работы}
+\studyField{01.03.02 <<Прикладная математика и информатика>>}
+\profile{01.03.02\_02 <<Системное программирование>>}
+\group{5030102/10201}
+\author{В. С. Скворцов}
+\supervisorTitle{доцент, к.т.н.}
+\supervisor{Е. И. Пчицкая}
+\city{Санкт-Петербург}
+\publishYear{2025}
+
+\begin{document}
+	% 1. Титульный лист
+    \include{sections/10_title}
+	% Титульник
+    % \includepdf[pages=-,  scale=1]{pdfs/01_Титульник.pdf}
+	% Индивидуальный план
+    % \includepdf[pages=-,  scale=1]{pdfs/02_ИП.pdf}
+
+	% 2. Задание на ВКР
+
+	% 3. Реферат
+	\newpage
+	\section*{РЕФЕРАТ}
+		\setcounter{section}{0}
+		\setcounter{subsection}{0}
+		\setcounter{figure}{0}
+		\setcounter{table}{0}
+		\subfile{sections/30_Реферат}
+
+	% 4. Содержание
+	\newpage
+	\renewcommand{\contentsname}{\normalfont\centering\bfseries СОДЕРЖАНИЕ}
+	\singlespacing  % Change spacing only for TOC
+	\tableofcontents
+	\onehalfspacing
+	\thispagestyle{empty}
+
+	% 5. Введение
+	\newpage
+	\section*{ВВЕДЕНИЕ}
+		\addcontentsline{toc}{section}{Введение}
+		\addtocontents{toc}{\protect\thispagestyle{empty}}  % To delete page number from toc
+		\setcounter{section}{0}
+		\setcounter{subsection}{0}
+		\setcounter{figure}{0}
+		\setcounter{table}{0}
+		\subfile{sections/50_Введение}
+
+	% 6. Основная часть
+	\include{sections/60_Основная-часть}
+
+	% 7. Заключение
+	\newpage
+	\section*{ЗАКЛЮЧЕНИЕ}
+		\addcontentsline{toc}{section}{Заключение}
+		\setcounter{section}{0}
+		\setcounter{subsection}{0}
+		\setcounter{figure}{0}
+		\setcounter{table}{0}
+		\subfile{sections/70_Заключение}
+
+	% 8. Список использованных источников
+	\include{sections/80_Источники}
+
+	% 9. Приложения
+	\include{sections/90_Приложения}
+\end{document}
+
+

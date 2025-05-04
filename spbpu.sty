@@ -1,0 +1,245 @@
+%----------------------------------------------------------------------%
+%   Санкт-Петербургский политехнический университет Петра Великого     %
+%   Common pre-amble for courseworks, reports and theses               %
+%----------------------------------------------------------------------%
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\ProvidesPackage{spbpu}[2025/05/04 v1.0 SPbPU coursework/thesis style]
+
+%======================== 1. Colour helpers ============================%
+\RequirePackage[table]{xcolor}
+\def\colorModel{hsb}   % rgb / hsb
+\RequirePackage{collcell}
+\RequirePackage{pgf}
+
+\newcommand\ColCell[1]{%
+  \pgfmathsetmacro\compA{#1/300}%
+  \pgfmathsetmacro\compB{0.5}%
+  \pgfmathsetmacro\compC{0.99}%
+  \edef\x{\noexpand\cellcolor[\colorModel]{\compA,\compB,\compC}}\x #1}
+
+\newcolumntype{F}[1]{>{\collectcell\ColCell}#1<{\endcollectcell}}
+
+%======================== 2. Fonts & language ==========================%
+\RequirePackage[english,russian]{babel}
+\RequirePackage{fontspec}
+  \defaultfontfeatures{Ligatures={TeX},Renderer=Basic}
+  \setmainfont[Ligatures={TeX,Historic}]{Times New Roman}
+  \setsansfont{Comic Sans MS}
+  \setmonofont{Courier New}
+
+\RequirePackage{mathtext}
+\RequirePackage{amsmath}
+  \numberwithin{equation}{section}
+
+%======================== 3. Page layout ===============================%
+\RequirePackage{extsizes}          % 14 pt classes support
+\RequirePackage{geometry}
+  \geometry{top=20mm,bottom=20mm,left=30mm,right=10mm}
+
+\RequirePackage{setspace}
+  \onehalfspacing
+
+\RequirePackage{float}
+\RequirePackage{fancyhdr}
+  \pagestyle{fancy}
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyhf{}
+  \rhead{\fontsize{14pt}{16pt}\selectfont\thepage}
+
+\RequirePackage{multicol}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+
+%----------- Enumerate tweaks -----------%
+\renewcommand{\theenumii}{\arabic{enumii}}
+\renewcommand{\labelenumii}{\theenumii)}
+\makeatletter
+\renewcommand{\p@enumii}{\theenumi.}
+\makeatother
+
+%======================== 4. Tables/figures ============================%
+\RequirePackage{array,tabularx,tabulary,booktabs}
+\RequirePackage{longtable}
+\RequirePackage{multirow}
+\RequirePackage{caption}[2020/02/03]
+\RequirePackage{titlesec}
+  \renewcommand{\thesection}{\arabic{section}.}
+  \renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
+  \renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
+  \titleformat{\section}{\normalfont\normalsize\centering\bfseries}
+              {\thesection}{1ex}{\setstretch{0.5}}
+  \titleformat{\subsection}[block]{\hspace{2.5em}\normalfont\normalsize\justifying\bfseries}
+              {\thesubsection}{1ex}{}
+  \titleformat{\subsubsection}{\normalfont\normalsize\centering\bfseries}
+              {\thesubsubsection}{1ex}{}
+
+\RequirePackage[dotinlabels]{titletoc}
+\RequirePackage{threeparttable}
+
+% Custom caption formats
+\DeclareCaptionFormat{diploma}{\raggedleft #1\\\centering #3}%
+\captionsetup[table]{format=plain,labelsep=newline,justification=centerlast,
+  textfont=normalfont,format=diploma,font={small,{stretch=1.2}},
+  belowskip=0pt,aboveskip=0pt}
+\newcommand\firstcaption[1]{\captionsetup[table]{justification=centerlast}\caption{#1}}
+\newcommand\followingcaption[1]{\captionsetup[table]{justification=raggedleft}\caption[]{#1}}
+
+\captionsetup[figure]{labelsep=period,font={small,{stretch=1.2}},belowskip=-36pt}
+
+% Figure/table numbering by section
+\renewcommand\thefigure{\arabic{section}.\arabic{figure}}
+\renewcommand\thetable{\arabic{section}.\arabic{table}}
+
+%======================== 5. Graphics ==================================%
+\RequirePackage{graphicx}
+  \graphicspath{{images/}{images/Task1/}{images/Task2/}{images/Task3/}{images/Task4/}}
+  \setlength\fboxsep{1pt}
+  \setlength\fboxrule{1pt}
+
+\RequirePackage{indentfirst}
+\RequirePackage{pdfpages}
+
+%======================== 6. Maths =====================================%
+\RequirePackage{amsfonts,amssymb,amsthm,mathtools}
+\RequirePackage{icomma}
+
+%======================== 7. TOC =======================================%
+\RequirePackage{tocloft}
+  \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+  \renewcommand\cfttoctitlefont{\hfill\fontsize{14pt}{16pt}\selectfont\bfseries}
+  \renewcommand\cftaftertoctitle{\hfill\mbox{}}
+  \renewcommand\cftsecfont{\mdseries}
+  \renewcommand\cftsecpagefont{\mdseries}
+  \setlength{\cftbeforesecskip}{0pt}
+  \renewcommand\cftsubsecafterpnum{\vskip0pt}
+  \setlength\cftparskip{2pt}
+
+%======================== 8. Code listings =============================%
+\RequirePackage{color}
+\definecolor{darkred}{rgb}{0.6,0,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\definecolor{lightblue}{rgb}{0,0.42,0.91}
+\definecolor{orange}{rgb}{0.99,0.48,0.13}
+\definecolor{grass}{rgb}{0.18,0.8,0.18}
+\definecolor{pink}{rgb}{0.97,0.15,0.45}
+
+\RequirePackage{listings}
+\lstset{
+  language=Python,
+  aboveskip=1em,
+  breaklines=true,
+  captionpos=top,
+  frame=single,
+  numbers=left,
+  numbersep=15pt,
+  numberstyle=\tiny,
+  escapeinside={\%*}{*)}
+}
+
+\lstdefinestyle{colored}{
+  basicstyle=\ttfamily,
+  backgroundcolor=\color{white},
+  commentstyle=\color{green}\itshape,
+  keywordstyle=\color{blue}\bfseries\itshape,
+  stringstyle=\color{red},
+}
+\lstdefinelanguage{PythonPlus}[]{Python}{
+  morekeywords=[1]{as,assert,nonlocal,with,yield,self,True,False,None},
+  morekeywords=[2]{__init__,__add__,__mul__,__div__,__sub__,__call__,__getitem__,
+                   __setitem__,__eq__,__ne__,__nonzero__,__rmul__,__radd__,
+                   __repr__,__str__,__get__,__truediv__,__pow__,__name__,
+                   __future__,__all__},
+  morekeywords=[3]{object,type,isinstance,copy,deepcopy,zip,enumerate,reversed,
+                   list,set,len,dict,tuple,range,append,execfile,real,imag,
+                   reduce,str,repr},
+  morekeywords=[4]{Exception,NameError,IndexError,SyntaxError,TypeError,ValueError,
+                   OverflowError,ZeroDivisionError},
+  morekeywords=[5]{ode,fsolve,sqrt,exp,sin,cos,arctan,arctan2,arccos,pi,array,
+                   norm,solve,dot,arange,isscalar,max,sum,flatten,shape,reshape,
+                   find,any,all,abs,plot,linspace,legend,quad,polyval,polyfit,
+                   hstack,concatenate,vstack,column_stack,empty,zeros,ones,rand,
+                   vander,grid,pcolor,eig,eigs,eigvals,svd,qr,tan,det,logspace,
+                   roll,min,mean,cumsum,cumprod,diff,vectorize,lstsq,cla,eye,
+                   xlabel,ylabel,squeeze},
+}
+\lstdefinelanguage{PyBrIM}[]{PythonPlus}{
+  emph={d,E,a,Fc28,Fy,Fu,D,des,supplier,Material,Rectangle,PyElmt},
+}
+\lstdefinestyle{colorEX}{
+  basicstyle=\ttfamily,
+  backgroundcolor=\color{white},
+  commentstyle=\color{darkgreen}\slshape,
+  keywordstyle=\color{blue}\bfseries\itshape,
+  keywordstyle=[2]\color{blue}\bfseries,
+  keywordstyle=[3]\color{grass},
+  keywordstyle=[4]\color{red},
+  keywordstyle=[5]\color{orange},
+  stringstyle=\color{darkred},
+  emphstyle=\color{pink}\underline,
+}
+\lstset{style=colored}
+
+% Restart lstlisting numbering by section
+\RequirePackage{chngcntr}
+\AtBeginDocument{\renewcommand{\thelstlisting}{\thesection\arabic{lstlisting}}}
+
+%======================== 9. TikZ / plots ==============================%
+\RequirePackage{tikz,pgfplots,pgfplotstable}
+\pgfplotsset{
+  tick label style={font={\fontsize{6pt}{8pt}\selectfont}},
+  label style={font={\fontsize{12pt}{12pt}\selectfont}},
+  legend style={font={\fontsize{12pt}{12pt}\selectfont}},
+  y tick label style={font={\fontsize{12pt}{12pt}\selectfont}}
+}
+
+%======================== 10. Bibliography =============================%
+\RequirePackage[
+  sorting=nty,
+  parentracker=true,
+  backend=biber,
+  hyperref=false,
+  language=auto,
+  autolang=other,
+  citestyle=gost-numeric,
+  defernumbers=true,
+  bibstyle=gost-numeric
+]{biblatex}
+\renewcommand*{\mkgostheading}[1]{#1}
+\urlstyle{same}
+\setlength\bibitemsep{0pt}
+\addbibresource{bibliography.bib}
+
+%======================== 11. Misc =====================================%
+\RequirePackage{afterpage,changepage,verbatim,subcaption}
+\RequirePackage{pdflscape}
+\RequirePackage{zref-totpages}
+\RequirePackage{xassoccnt}
+  \NewTotalDocumentCounter{totalfigures}
+  \NewTotalDocumentCounter{totaltables}
+  \NewTotalDocumentCounter{appendixchapters}
+  \DeclareAssociatedCounters{figure}{totalfigures}
+  \DeclareAssociatedCounters{table}{totaltables}
+
+\RequirePackage{ragged2e}
+\RequirePackage{subfiles}
+
+%======================== 12. Works metadata ===========================%
+\def\university#1{\def\university{#1}}
+\def\institute#1{\def\institute{#1}}
+\def\school#1{\def\school{#1}}
+\def\thesisTitle#1{\def\thesisTitle{#1}}
+\def\type#1{\def\type{#1}}
+\def\title#1{\def\title{#1}}
+\def\studyField#1{\def\studyField{#1}}
+\def\profile#1{\def\profile{#1}}
+\def\group#1{\def\group{#1}}
+\def\author#1{\def\author{#1}}
+\def\supervisorTitle#1{\def\supervisorTitle{#1}}
+\def\supervisor#1{\def\supervisor{#1}}
+\def\publishYear#1{\def\publishYear{#1}}
+\def\city#1{\def\city{#1}}
+
+\def\workDiscipline{Дисциплина}
+
+% Allow user redefinitions later
+\endinput
